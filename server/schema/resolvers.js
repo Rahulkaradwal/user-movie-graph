@@ -1,4 +1,3 @@
-const { UserList, MovieList } = require("../FakeData");
 const Movie = require("../models/movie");
 const User = require("../models/user");
 
