@@ -1,11 +1,15 @@
 import React from "react";
 import OperationsDashboard from "./OperationsDashboard";
-import User from "../GetOperations/User";
+import GetOperationsDashboard from "../GetOperations/GetOperationsDashboard";
 
 function Dashboard({ view }) {
   return (
     <div className=" p-2  rounded-md ">
-      {view === "getData" ? <User /> : <OperationsDashboard />}
+      {view === "getData" ? (
+        <GetOperationsDashboard />
+      ) : (
+        <OperationsDashboard />
+      )}
     </div>
   );
 }

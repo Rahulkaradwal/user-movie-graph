@@ -16,7 +16,7 @@ function App() {
   };
   return (
     <ApolloProvider client={client}>
-      <div className="bg-white h-[100vh] overflow-hidden">
+      <div className="bg-white h-[99vh] overflow-hidden">
         <ViewButtons handleView={handleView} view={view} />
         <Dashboard view={view} />
       </div>

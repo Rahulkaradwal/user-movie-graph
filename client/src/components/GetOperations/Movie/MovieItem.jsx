@@ -2,9 +2,12 @@ import React from "react";
 
 function MovieItem({ movie }) {
   return (
-    <div className=" bg-slate-200 overflow-y-auto w-44 h-32 text-center p-4 rounded-md">
-      <div key={movie.id}>
-        <h2 className="font-bold ">{movie.name}</h2>
+    <div
+      key={movie.id}
+      className=" bg-slate-100 w-full h-fit p-4 mb-2 rounded-md"
+    >
+      <h2 className="font-bold ">{movie.name}</h2>
+      <div className="flex justify-between">
         <p> Year: {movie.yearOfPublication}</p>
         <p>In Theaters: {movie.isInTheaters ? "Yes" : "No"}</p>
       </div>
