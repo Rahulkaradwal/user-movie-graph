@@ -11,20 +11,20 @@ type Movie {
 
 
 
-type user {
+type User {
     id: ID!
     username: String!
     age: Int!
     nationality: String!
-    friends: [user]
+    friends: [User]
     favoriteMovies: [Movie]
 }
 
 
 
   type Query {
-    users: [user!]!
-    user(id: ID!): user!
+    users: [User!]!
+    user(id: ID!): User!
     movies: [Movie!]!
     movie(name: String!): Movie!
 
@@ -32,11 +32,11 @@ type user {
 
 
   type Mutation {
-    addUser(username: String!, age: Int!, nationality: String!, favoriteMovies: [ID], friends: [ID]): user
+    addUser(username: String!, age: Int!, nationality: String!, favoriteMovies: [ID], friends: [ID]): User
     addMovie(name: String!, yearOfPublication: Int!, isInTheaters: Boolean!): Movie
-    updateUser(id: ID!,name: String,  age: Int, nationality: String): user
+    updateUser(id: ID!,name: String,  age: Int, nationality: String): User
     updateMovie(id: ID!, name: String, yearOfPublication: Int, isInTheaters: Boolean): Movie
-    deleteUser(id: ID!): user
+    deleteUser(id: ID!): User
     deleteMovie(id: ID!): Movie
   }
 `;
