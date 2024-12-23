@@ -4,9 +4,15 @@ function UserItem({ user }) {
   const { id, username, age, nationality, friends, favoriteMovies } = user;
 
   return (
-    <div key={id} className="bg-slate-100 w-full  p-4 mb-2 rounded-lg">
+    <div
+      key={id}
+      className="bg-slate-200 shadow-md w-full  p-4 mb-2 rounded-lg"
+    >
       {/* Username */}
-      <h2 className="text-lg font-bold text-gray-800 mb-2">{username}</h2>
+      <div className="flex justify-between">
+        <h2 className="text-lg font-bold text-gray-800 mb-2">{username}</h2>
+        <span className="text-[10px]">{id}</span>
+      </div>
 
       {/* Age and Nationality */}
       <div className="flex justify-between text-gray-600 mb-2">
