@@ -3,7 +3,7 @@ import { gql, useSuspenseQuery } from "@apollo/client";
 import UserItem from "./UserItem";
 import Spinner from "../../ui/Spinner";
 
-const GET_USERS = gql`
+export const GET_USERS = gql`
   query Users {
     users {
       id
@@ -28,7 +28,7 @@ function UserList() {
     return <p className="text-center text-red-500">Error: {error.message}</p>;
 
   return (
-    <div className="overflow-y-scroll h-screen p-2 ">
+    <div className="overflow-y-scroll h-[100vh] p-2 ">
       <Suspense fallback={<Spinner />}>
         {data.users.map((user) => (
           <UserItem key={user.id} user={user} />

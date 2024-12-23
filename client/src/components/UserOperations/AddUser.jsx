@@ -2,13 +2,37 @@ import React, { useState } from "react";
 import Input from "../ui/Input";
 import SelectInput from "../ui/SelectInput";
 import Button from "../ui/Button";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useMutation } from "@apollo/client";
+import Spinner from "../ui/Spinner";
 
 const GET_USERS = gql`
   query Users {
     users {
       id
       username
+    }
+  }
+`;
+
+const ADD_USER = gql`
+  mutation AddUser(
+    $username: String!
+    $age: Int!
+    $nationality: String!
+    $favoriteMovies: [ID]
+    $friends: [ID]
+  ) {
+    addUser(
+      username: $username
+      age: $age
+      nationality: $nationality
+      favoriteMovies: $favoriteMovies
+      friends: $friends
+    ) {
+      id
+      username
+      age
+      nationality
     }
   }
 `;
@@ -25,9 +49,29 @@ function AddUser() {
   const [nationality, setNationality] = useState("");
   const [friend, setFriend] = useState();
 
+  const [addUser, { error: errorAddUser, loading: loadingAddUser }] =
+    useMutation(ADD_USER, {
+      refetchQueries: [GET_USERS],
+    });
+
   const handleSubmit = () => {
-    console.log(name, age, nationality, friend);
+    addUser({
+      variables: {
+        username: name,
+        age: parseInt(age),
+        nationality,
+        favoriteMovies: [],
+        friends: [friend],
+      },
+    });
+
+    setName("");
+    setAge("");
+    setNationality("");
   };
+
+  if (loadingAddUser) return <Spinner />;
+  if (errorAddUser) return <p>Error: {errorAddUser.message}</p>;
 
   return (
     <div className="border border-gray-300 h-full p-4 flex rounded-md justify-center items-center flex-col gap-4 bg-gray-50">

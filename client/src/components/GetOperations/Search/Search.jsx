@@ -49,7 +49,9 @@ function Search() {
 
   return (
     <div className="border rounded-md flex flex-col">
-      <h2 className="text-lg font-semibold border-b p-2">Find By ID</h2>
+      <h2 className="text-lg font-semibold border-b p-2 text-center">
+        Find By ID
+      </h2>
       <div className="p-4 m-2 border bg-slate-200 shadow-md rounded-md">
         <FindByID setFilter={setFilter} />
         {filter === "movie" && (

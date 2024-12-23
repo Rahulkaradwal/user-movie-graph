@@ -1,12 +1,34 @@
 import React from "react";
+import { gql, useMutation } from "@apollo/client";
+import { GET_USERS } from "./UserList";
+
+const DELETE_USER = gql`
+  mutation DeleteUser($deleteUserId: ID!) {
+    deleteUser(id: $deleteUserId) {
+      id
+    }
+  }
+`;
 
 function UserItem({ user }) {
+  const [deleteUser] = useMutation(DELETE_USER, {
+    refetchQueries: [GET_USERS],
+    awaitRefetchQueries: true,
+  });
   const { id, username, age, nationality, friends, favoriteMovies } = user;
+
+  const handleDelete = () => {
+    deleteUser({
+      variables: {
+        deleteUserId: id,
+      },
+    });
+  };
 
   return (
     <div
       key={id}
-      className="bg-slate-200 shadow-md w-full  p-4 mb-2 rounded-lg"
+      className="bg-slate-200 relative shadow-md w-full  p-4 mb-2 rounded-lg"
     >
       {/* Username */}
       <div className="flex justify-between">
@@ -39,6 +61,12 @@ function UserItem({ user }) {
           </p>
         )}
       </div>
+      <button
+        onClick={handleDelete}
+        className="absolute bottom-2 right-3 bg-slate-400 hover:bg-slate-500 duration-200 cursor-pointer text-white rounded-md w-6 h-6 flex justify-center items-center"
+      >
+        X
+      </button>
     </div>
   );
 }

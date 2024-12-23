@@ -3,7 +3,7 @@ import { gql, useSuspenseQuery } from "@apollo/client";
 import MovieItem from "./MovieItem";
 import Spinner from "../../ui/Spinner";
 
-const GET_MOVIES = gql`
+export const GET_MOVIES = gql`
   query getMovies {
     movies {
       id
