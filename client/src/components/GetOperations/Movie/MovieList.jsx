@@ -1,6 +1,7 @@
-import React from "react";
-import { useQuery, gql } from "@apollo/client";
+import React, { Suspense } from "react";
+import { gql, useSuspenseQuery } from "@apollo/client";
 import MovieItem from "./MovieItem";
+import Spinner from "../../ui/Spinner";
 
 const GET_MOVIES = gql`
   query getMovies {
@@ -14,16 +15,18 @@ const GET_MOVIES = gql`
 `;
 
 function MovieList() {
-  const { loading, error, data } = useQuery(GET_MOVIES);
+  const { loading, error, data } = useSuspenseQuery(GET_MOVIES);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Spinner />;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className="overflow-y-scroll h-screen p-2">
-      {data.movies.map((movie) => (
-        <MovieItem key={movie.id} movie={movie} />
-      ))}
+      <Suspense fallback={<Spinner />}>
+        {data.movies.map((movie) => (
+          <MovieItem key={movie.id} movie={movie} />
+        ))}
+      </Suspense>
     </div>
   );
 }
